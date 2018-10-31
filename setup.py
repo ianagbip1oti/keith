@@ -1,10 +1,25 @@
-
-from setuptools import setup, find_packages
-
-setup(name='keith',
-      packages=find_packages(),
-      setup_requires=['pytest-runner==4.2'],
-      tests_require=['pytest==3.9.3']
-        )
+from distutils.cmd import Command
+from setuptools import find_packages, setup
 
 
+class YapfCommand(Command):
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        import yapf
+        yapf.main(['yapf', '--recursive', '--in-place', 'setup.py', 'tests'] +
+                  find_packages())
+
+
+setup(
+    name='keith',
+    packages=find_packages(),
+    cmdclass={'yapf': YapfCommand},
+    setup_requires=['pytest-runner==4.2', 'yapf==0.24.0'],
+    tests_require=['pytest==3.9.3'])
