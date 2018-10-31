@@ -4,7 +4,5 @@ python:
     - "3.6"
     - "3.7"
     - "pypy3.5"
-    - "pypy3.6"
-    - "pypy3.7"
 install: python setup.py install
 script: python setup.py test
