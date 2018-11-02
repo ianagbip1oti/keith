@@ -15,3 +15,6 @@ _NEWLINE: ( /\r?\n[\t ]*/ | COMMENT )+
 
 %import common.CNAME -> IDENTIFIER
 %import common.ESCAPED_STRING -> STRING
+
+%ignore /[\t \f]+/  // WS
+%ignore COMMENT
