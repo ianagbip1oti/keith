@@ -21,5 +21,6 @@ setup(
     name='keith',
     packages=find_packages(),
     cmdclass={'yapf': YapfCommand},
+    install_requires=['lark-parser==0.6.5'],
     setup_requires=['pytest-runner==4.2', 'yapf==0.24.0'],
     tests_require=['pytest==3.9.3'])
