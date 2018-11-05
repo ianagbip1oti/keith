@@ -18,3 +18,4 @@ _NEWLINE: ( /\r?\n[\t ]*/ | COMMENT )+
 
 %ignore /[\t \f]+/  // WS
 %ignore COMMENT
+%declare _INDENT _DEDENT

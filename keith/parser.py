@@ -13,9 +13,8 @@ class PythonIndenter(Indenter):
     tab_len = 8
 
 
-grammar_file = os.path.join(os.path.dirname(__file__), 'grammar.lark')
-
-parser = Lark.open('grammar.lark', rel_to=__file__, postlex=PythonIndenter())
+parser = Lark.open(
+    'grammar.lark', rel_to=__file__, postlex=PythonIndenter(), parser='lalr')
 
 
 def parse(inp):
