@@ -1,0 +1,21 @@
+?start: compound_expr
+
+compound_expr: (_NEWLINE | expr)*
+
+?expr: function_call
+     | literal
+
+function_call: IDENTIFIER "(" arguments ")"
+arguments: expr ("," expr)*
+
+literal: STRING
+
+COMMENT: /#[^\n]*/
+_NEWLINE: ( /\r?\n[\t ]*/ | COMMENT )+
+
+%import common.CNAME -> IDENTIFIER
+%import common.ESCAPED_STRING -> STRING
+
+%ignore /[\t \f]+/  // WS
+%ignore COMMENT
+%declare _INDENT _DEDENT

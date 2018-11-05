@@ -1,16 +1,21 @@
 from lark import Lark
+from lark.indenter import Indenter
 
-grammar = Lark('''
-start: IDENTIFIER "(" arguments ")"
+import os
 
-arguments: expr ("," expr)*
 
-?expr: STRING
+class PythonIndenter(Indenter):
+    NL_type = '_NEWLINE'
+    OPEN_PAREN_types = ['LPAR', 'LSQB', 'LBRACE']
+    CLOSE_PAREN_types = ['RPAR', 'RSQB', 'RBRACE']
+    INDENT_type = '_INDENT'
+    DEDENT_type = '_DEDENT'
+    tab_len = 8
 
-%import common.CNAME -> IDENTIFIER
-%import common.ESCAPED_STRING -> STRING
-''')
+
+parser = Lark.open(
+    'grammar.lark', rel_to=__file__, postlex=PythonIndenter(), parser='lalr')
 
 
 def parse(inp):
-    return grammar.parse(inp)
+    return parser.parse(inp)
