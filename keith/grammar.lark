@@ -2,11 +2,16 @@
 
 compound_expr: (_NEWLINE | expr)*
 
-?expr: function_call
+?expr: function_def
+     | function_call
      | literal
 
-function_call: IDENTIFIER "(" arguments ")"
-arguments: expr ("," expr)*
+function_def: "def" IDENTIFIER parameters ":" _NEWLINE _INDENT compound_expr _DEDENT
+parameters: "(" [ IDENTIFIER ("," IDENTIFIER)* ] ")"
+
+function_call: IDENTIFIER arguments
+arguments: "(" expr ("," expr)* ")"
+
 
 literal: STRING
 
